@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { 
   Register,
-  Posts
+  Posts,
+  Login
 } from './';
+
 import { fetchPosts } from '../ajax-requests';
 
 
@@ -43,6 +45,10 @@ function App() {
         <Route 
           path='/register' 
           element={<Register setToken={setToken} />} 
+        />
+        <Route
+          path='/login'
+          element={<Login setToken={setToken} />}
         />
       </Routes>
     </div>
