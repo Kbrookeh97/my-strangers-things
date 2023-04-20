@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Register } from './';
+import { Routes, Route } from 'react-router-dom';
+import { 
+  Register,
+  Posts
+} from './';
+import { fetchPosts } from '../ajax-requests';
 
 
 function App() {
   const [token, setToken] = useState('');
+  const [posts, setPosts] = useState([]);
   
   function tokenCheck() {
     if (window.localStorage.getItem('token')) {
@@ -11,17 +17,36 @@ function App() {
     }
   }
   
+  async function getPosts() {
+    const results = await fetchPosts();
+    if (results.success) {
+      setPosts(results.data.posts)
+    }
+  }
+  
   useEffect(() => {
     tokenCheck();
   }, [])
   
-  console.log('stateful token', token)
+  useEffect(() => {
+    getPosts();
+  }, [token])
+  
   
   return (
     <div>
-      <Register setToken={setToken} />
+      <Routes>
+        <Route 
+          path='/' 
+          element={<Posts posts={posts} />} 
+        />
+        <Route 
+          path='/register' 
+          element={<Register setToken={setToken} />} 
+        />
+      </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
