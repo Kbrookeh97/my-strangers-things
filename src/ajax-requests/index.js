@@ -58,3 +58,25 @@ export const fetchPosts = async () => {
     console.error(err);
   }
 };
+
+
+export const makePost = async (post, token) => {
+  
+  try {
+    const response = await fetch(`${BASE_URL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post
+      }),
+    });
+    const result = await response.json();
+    // console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
