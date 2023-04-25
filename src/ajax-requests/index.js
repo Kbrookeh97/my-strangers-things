@@ -45,11 +45,33 @@ export const login = async (user) => {
 };
 
 
+export const myData = async (token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    // console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
 
 // POSTS REQUEST ROUTES ==================================================
-export const fetchPosts = async () => {
+export const fetchPosts = async (token) => {
   try {
-    const response = await fetch(`${BASE_URL}/posts`);
+    const response = await fetch(`${BASE_URL}/posts`, {
+      headers: {
+        'Content-Type': "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    });
 
     const result = await response.json();
     // console.log(result);

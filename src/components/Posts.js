@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 function Posts({ posts }) {
   // console.log('from Posts component', posts)
@@ -8,7 +8,21 @@ function Posts({ posts }) {
       {
         posts && posts.map((post) => {
           return (
-            <p key={post._id}>{post.title}</p>
+            <Fragment key={post._id}>
+              {
+                post.isAuthor ? (
+                  <>
+                    <p>{post.title}</p>
+                    <button>Delete</button>
+                  </>
+                ) : (
+                  <>
+                    <p>{post.title}</p>
+                    <button>Message</button>
+                  </>
+                )
+              }
+            </Fragment>
           )
         })
       }
