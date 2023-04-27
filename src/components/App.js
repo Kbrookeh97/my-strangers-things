@@ -5,7 +5,8 @@ import {
   Posts,
   Login,
   CreatePost,
-  Nav
+  Nav,
+  UpdatePost
 } from './';
 
 import { fetchPosts, myData } from '../ajax-requests';
@@ -75,6 +76,13 @@ function App() {
         <Route
           path='/create-post'
           element={<CreatePost token={token} getPosts={getPosts} />}
+        />
+        <Route
+          path='/update-post/:postId'
+          element={<UpdatePost 
+          posts={posts} 
+          token={token} 
+          getPosts={getPosts} />}
         />
       </Routes>
     </div>

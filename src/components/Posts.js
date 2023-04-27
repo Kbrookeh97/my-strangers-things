@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 function Posts({ posts }) {
   // console.log('from Posts component', posts)
@@ -14,6 +15,7 @@ function Posts({ posts }) {
                   <>
                     <p>{post.title}</p>
                     <button>Delete</button>
+                    <Link to={`/update-post/${post._id}`} ><button>Edit Post</button></Link>
                   </>
                 ) : (
                   <>
