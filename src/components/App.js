@@ -8,8 +8,7 @@ import {
   CreatePost,
   Nav,
   UpdatePost,
-  SendMessage,
-  Profile
+  SendMessage
 } from './';
 
 import { fetchPosts, myData } from '../ajax-requests';
@@ -94,26 +93,9 @@ function App() {
           getPosts={getPosts} 
           navigate={navigate}/>}
         />
-        <Route 
-        path='/send-message/:postId'
-        element={<SendMessage
-          posts={posts}
-          token={token}
-          getPosts={getPosts}
-          navigate={navigate}
-          handleSend={handleSendMessage}
-        />}
-        />
-        <Route 
-        path='/profile'
-        element={<Profile
-          user={user}
-          posts={posts}
-          token={token}
-          fetchPosts={fetchPosts}
-          navigate={navigate}
-          messageContent={messageContent}
-        />}
+        <Route
+          path='/sendMessage'
+          element={<SendMessage setToken={setToken} navigate={navigate} />}
         />
       </Routes>
     </div>

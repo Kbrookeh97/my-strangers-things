@@ -128,6 +128,24 @@ export const updatePost = async (postId, token, updatedPost) => {
   }
 };
 
+export const deletePost = async (postId) => {
+  try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${BASE_URL}/posts/${ postId }`, {
+          method: "DELETE",
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          }
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+  } catch (err) {
+      console.error(err);
+  }
+}
+
 export const postMessage = async ({postId, message}) => {
   try {
       const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {

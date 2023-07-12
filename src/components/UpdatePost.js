@@ -1,7 +1,28 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updatePost } from '../ajax-requests';
+import { Button } from '@mui/material';
 
+const styles = {
+  div: {
+    display: 'flex',
+    marginRight: '5px',
+    padding: '10px',
+    justifyContent: 'center'
+  },
+  h3: {
+    fontFamily: 'mali',
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  button: {
+    fontFamily: 'gaegu',
+    fontWeight: 'bold',
+    width: '100px',
+    color: 'black',
+    background: 'rgba(163, 123, 202, 1)',
+  }
+};
 
 function UpdatePost({ posts, token, getPosts }) {
   const navigate = useNavigate();
@@ -9,13 +30,11 @@ function UpdatePost({ posts, token, getPosts }) {
   // console.log("params 'id' value: ", postId);
   const [post] = posts.filter((post) => post._id === postId );
   
-  const { title, description, price, location, willDeliver } = post ? post : {};
+  const { title, description, price } = post ? post : {};
   
   const [updatedTitle, setTitle] = useState(title);
   const [updatedDescription, setDescription] = useState(description);
   const [updatedPrice, setPrice] = useState(price);
-  const [updatedLocation, setLocation] = useState(location);
-  const [updatedWillDeliver, setWillDeliver] = useState(willDeliver);
   const [errorMessage, setErrorMessage] = useState('');
   
   
@@ -26,8 +45,6 @@ function UpdatePost({ posts, token, getPosts }) {
       title: updatedTitle,
       description: updatedDescription,
       price: updatedPrice,
-      location: updatedLocation,
-      willDeliver: updatedWillDeliver
     }
     
     const results = await updatePost(postId, token, updatedPost);
@@ -42,35 +59,27 @@ function UpdatePost({ posts, token, getPosts }) {
   
   return (
     <>
+    <div>
+      <h3 style={styles.h3}>Edit Your Post Here!</h3>
       {post ? (
         <>
-          <form onSubmit={handleSubmit}>
-            <input
+          <form onSubmit={handleSubmit} style={styles.div}>
+            <input style={styles.div}
               type="text"
               value={updatedTitle}
               onChange={(ev) => setTitle(ev.target.value)}
             />
-            <input
+            <input style={styles.div}
               type="text"
               value={updatedDescription}
               onChange={(ev) => setDescription(ev.target.value)}
             />
-            <input
+            <input style={styles.div}
               type="text"
               value={updatedPrice}
               onChange={(ev) => setPrice(ev.target.value)}
             />
-            <input
-              type="text"
-              value={updatedLocation}
-              onChange={(ev) => setLocation(ev.target.value)}
-            />
-            <input
-              type="checkbox"
-              checked={updatedWillDeliver}
-              onChange={() => setWillDeliver(!updatedWillDeliver)}
-            />
-            <button type='submit'>Save Changes</button>
+            <Button style={styles.button} variant='outlined' type='submit'>Save Changes</Button>
           </form>
           {
             errorMessage && <p>{errorMessage}</p>
@@ -79,8 +88,9 @@ function UpdatePost({ posts, token, getPosts }) {
       ) : (
         <h1>Post Does Not Exist.</h1>
       )}
+      </div>
     </>
-  );
+  )
 }
 
 export default UpdatePost;

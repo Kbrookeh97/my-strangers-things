@@ -22,8 +22,6 @@ function CreatePost({ token, getPosts }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  // const [location, setLocation] = useState('');
-  // const [willDeliver, setWillDeliver] = useState(false);
   
   async function handleSubmit(event) {
     event.preventDefault();
