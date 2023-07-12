@@ -1,5 +1,21 @@
 import React, { useState } from 'react';
 import { registerUser } from '../ajax-requests';
+import { Button } from '@mui/material';
+import './style.css'
+
+const styles = {
+  div: {
+    display: 'flex',
+    marginRight: '5px',
+    padding: '10px',
+    justifyContent: 'center'
+  },
+  h3: {
+    fontFamily: 'mali',
+    display: 'flex',
+    justifyContent: 'center'
+  }
+}
 
 function Register({ setToken }) {
   const [username, setUsername] = useState('');
@@ -26,19 +42,22 @@ function Register({ setToken }) {
   }
   
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
+    <div >
+      <h3 style={styles.h3}>Welcome! Register Here</h3>
+    <form onSubmit={handleSubmit} style={styles.div}>
+      <input style={styles.div}
         type='text'
         placeholder='Enter Username'
         onChange={(event) => setUsername(event.target.value)}
       />
-      <input 
+      <input style={styles.div}
         type='password'
         placeholder='Enter Password'
         onChange={(event) => setPassword(event.target.value)}
       />
-      <button type='submit'>Submit</button>
+      <Button type='submit' variant='outlined'>Submit</Button>
     </form>
+    </div>
   )
 }
 

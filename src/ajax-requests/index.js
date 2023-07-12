@@ -96,7 +96,7 @@ export const makePost = async (post, token) => {
       }),
     });
     const result = await response.json();
-    // console.log(result);
+    console.log(result);
     return result;
   } catch (err) {
     console.error(err);
@@ -125,5 +125,27 @@ export const updatePost = async (postId, token, updatedPost) => {
     return result;
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const postMessage = async ({postId, message}) => {
+  try {
+      const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              message: {
+                  content: message.content
+              }
+          })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+  } catch (err) {
+      console.error(err);
   }
 };
